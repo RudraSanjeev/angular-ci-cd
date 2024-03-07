@@ -29,13 +29,13 @@ pipeline {
             steps {
                 // Authenticate with Docker Hub
                 withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'username', passwordVariable: 'password')]) {
-                    sh "docker login -u $username -p $password"
+                   sudo sh "docker login -u $username -p $password"
                 }
                 // Build the Docker image
-                sh "docker build -t $DOCKER_IMAGE_NAME ."
+                sudo sh "docker build -t $DOCKER_IMAGE_NAME ."
                 // Push the Docker image to Docker Hub
-                sh "docker tag angular-demo:latest $DOCKER_IMAGE_NAME"
-                sh "docker push $DOCKER_IMAGE_NAME"
+                sudo sh "docker tag angular-demo:latest $DOCKER_IMAGE_NAME"
+                sudo sh "docker push $DOCKER_IMAGE_NAME"
             }
         }
     }
