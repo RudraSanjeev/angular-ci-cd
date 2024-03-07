@@ -28,8 +28,8 @@ pipeline {
         stage('Docker Build and Push') {
             steps {
                 // Authenticate with Docker Hub
-                withCredentials([usernamePassword(credentialsId: DOCKER_HUB_CREDENTIALS, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
+                withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'username', passwordVariable: 'password')]) {
+                    sh "docker login -u $username -p $password"
                 }
                 // Build the Docker image
                 sh "docker build -t $DOCKER_IMAGE_NAME ."
